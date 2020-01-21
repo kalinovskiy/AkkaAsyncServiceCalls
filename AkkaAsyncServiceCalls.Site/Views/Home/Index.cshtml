@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IndexViewModel
+
+<div class="form-group">
+    <label for="lstPersons">Recipients</label>
+    <div id="lstPersons">
+        @foreach (var person in Model.Persons)
+        {
+            <div>
+                <img src="img/person.png" height="38"/>
+                @($"{person.LastName} {person.LastName} {person.Email} {person.Phone}")
+            </div>
+        }
+    </div>
+</div>
+
+<div class="form-group" style="margin-top: 5px;">
+    <label for="txtMessages">Messages (separated by ';')</label>
+    <textarea id="txtMessages" rows="3" cols="80" class="form-control"></textarea>
+</div>
+
+<div class="form-group" style="margin-top: 5px;">
+    <input id="btnSend" type="button" class="btn btn-primary" value="Send" />&nbsp;
+    <input id="btnStop" type="button" class="btn btn-primary" value="Stop" disabled />
+</div>
+
+<div class="form-group" style="margin-top: 5px;" id="blockOutput"></div>

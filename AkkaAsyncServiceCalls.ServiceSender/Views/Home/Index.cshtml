@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IndexViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @if (Model.IsEmailActive)
+            {
+                <img src="img/red_ball.png" id="imgEmailRed" class="hidden" />
+                <img src="img/green_ball.png" id="imgEmailGreen" />
+                <input type="button" class="btn btn-primary" value="Выключить обработку Email" id="btnToggleEmailState" />
+            }
+            else
+            {
+                <img src="img/red_ball.png" id="imgEmailRed" />
+                <img src="img/green_ball.png" id="imgEmailGreen" class="hidden" />
+                <input type="button" class="btn btn-primary" value="Включить обработку Email" id="btnToggleEmailState" />
+            }
+        </div>
+        <div class="form-group">
+            <textarea id="txtEmailMessages" rows="20" class="form-control" style="width: 100%" readonly></textarea>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            @if (Model.IsSmsActive)
+            {
+                <img src="img/red_ball.png" id="imgSmsRed" class="hidden" />
+                <img src="img/green_ball.png" id="imgSmsGreen" />
+                <input type="button" class="btn btn-primary" value="Выключить обработку SMS" id="btnToggleSmsState" />
+            }
+            else
+            {
+                <img src="img/red_ball.png" id="imgSmsRed" />
+                <img src="img/green_ball.png" id="imgSmsGreen" class="hidden" />
+                <input type="button" class="btn btn-primary" value="Включить обработку SMS" id="btnToggleSmsState" />
+            }
+        </div>
+        <div class="form-group">
+            <textarea id="txtSmsMessages" rows="20" class="form-control" style="width: 100%" readonly></textarea>
+        </div>
+    </div>
+</div>
