@@ -15,7 +15,7 @@ namespace AkkaAsyncServiceCalls.Site.Services
 
         public async Task WriteMessageAsync(string message)
         {
-            await _hub.Clients.All.SendAsync("TraceMessage", $"{DateTime.Now}:{message}");
+            await _hub.Clients.All.SendAsync("TraceMessage", $"{DateTime.Now:T}:{message}");
         }
 
         public async Task Finish()

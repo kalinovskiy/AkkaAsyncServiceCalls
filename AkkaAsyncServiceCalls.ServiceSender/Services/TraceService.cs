@@ -15,7 +15,7 @@ namespace AkkaAsyncServiceCalls.ServiceSender.Services
 
         public async Task WriteMessageAsync(string method, string message)
         {
-            await _hub.Clients.All.SendAsync(method, $"{DateTime.Now}:{message}");
+            await _hub.Clients.All.SendAsync(method, $"{DateTime.Now:T}:{message}");
         }
     }
 }

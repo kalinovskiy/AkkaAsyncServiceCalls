@@ -24,7 +24,8 @@ namespace AkkaAsyncServiceCalls.Site.Actors
                 var provider = scope.ServiceProvider;
 
                 var traceService = provider.GetService<ITraceService>();
-                await traceService.WriteMessageAsync($"EMAIL_SENDER {Self}: sending email for {msg.Email}");
+                await traceService.WriteMessageAsync(
+                    $"EMAIL_SENDER: sending email for {msg.Email}");
 
                 var settingsService = provider.GetService<ISettingsService>();
                 var url = settingsService.GetEmailServiceUrl();

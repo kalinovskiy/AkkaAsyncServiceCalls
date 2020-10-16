@@ -24,7 +24,8 @@ namespace AkkaAsyncServiceCalls.Site.Actors
                 var provider = scope.ServiceProvider;
 
                 var traceService = provider.GetService<ITraceService>();
-                await traceService.WriteMessageAsync($"SMS_SENDER {Self}: sending sms for {msg.Phone}");
+                await traceService.WriteMessageAsync(
+                    $"SMS_SENDER: sending sms for {msg.Phone}");
 
                 var settingsService = provider.GetService<ISettingsService>();
                 var url = settingsService.GetSmsServiceUrl();

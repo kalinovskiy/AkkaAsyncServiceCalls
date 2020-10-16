@@ -33,7 +33,7 @@ namespace AkkaAsyncServiceCalls.Site.Actors
                 _emailProps = Props.Create(() => new ActorEmail(scopeFactory, CreateBreaker()));
                 _smsProps = Props.Create(() => new ActorSms(scopeFactory, CreateBreaker()));
 
-                traceService.WriteMessageAsync($"COORDINATOR {Self}: created");
+                //traceService.WriteMessageAsync($"COORDINATOR {Self}: created");
             }
         }
 
@@ -45,17 +45,20 @@ namespace AkkaAsyncServiceCalls.Site.Actors
 
                 if (message is DtoCompleted cmp)
                 {
-                    traceService.WriteMessageAsync($"COORDINATOR {Self}: sending is completed, sender={cmp.ActorRef}");
+                    //traceService.WriteMessageAsync(
+                    //    $"COORDINATOR {Self}: sending is completed, sender={cmp.ActorRef}");
                     traceService.Finish();
                 }
                 if (message is Terminated trm)
                 {
-                    traceService.WriteMessageAsync($"COORDINATOR {Self}: sending is terminated, error={trm}");
+                    //traceService.WriteMessageAsync(
+                    //    $"COORDINATOR {Self}: sending is terminated, error={trm}");
                     traceService.Finish();
                 }
                 else if (message is DtoNotification msg)
                 {
-                    traceService.WriteMessageAsync($"COORDINATOR {Self}: sending notifications for { msg.Person.LastName}");
+                    traceService.WriteMessageAsync(
+                        $"COORDINATOR: sending notifications for { msg.Person.LastName}");
                     ProcessMessage(msg);
                 }
             }
@@ -100,27 +103,27 @@ namespace AkkaAsyncServiceCalls.Site.Actors
             });
         }
 
-        protected override void PreStart()
-        {
-            using (var scope = _scopeFactory.CreateScope())
-            {
-                var traceService = scope.ServiceProvider.GetService<ITraceService>();
-                traceService.WriteMessageAsync($"COORDINATOR {Self}: PreStart");
-            }
+        //protected override void PreStart()
+        //{
+        //    using (var scope = _scopeFactory.CreateScope())
+        //    {
+        //        var traceService = scope.ServiceProvider.GetService<ITraceService>();
+        //        traceService.WriteMessageAsync($"COORDINATOR {Self}: PreStart");
+        //    }
 
-            base.PreStart();
-        }
+        //    base.PreStart();
+        //}
 
-        protected override void PostStop()
-        {
-            using (var scope = _scopeFactory.CreateScope())
-            {
-                var traceService = scope.ServiceProvider.GetService<ITraceService>();
-                traceService.WriteMessageAsync($"COORDINATOR {Self}: PostStop");
-            }
+        //protected override void PostStop()
+        //{
+        //    using (var scope = _scopeFactory.CreateScope())
+        //    {
+        //        var traceService = scope.ServiceProvider.GetService<ITraceService>();
+        //        traceService.WriteMessageAsync($"COORDINATOR {Self}: PostStop");
+        //    }
 
-            base.PostStop();
-        }
+        //    base.PostStop();
+        //}
 
         protected override SupervisorStrategy SupervisorStrategy()
         {
